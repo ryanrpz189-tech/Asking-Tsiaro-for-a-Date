@@ -1,49 +1,60 @@
-/* ═══════════════════════════════════════════════
-   DESIGN TOKENS  — edit these to restyle everything
-═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   TOKENS — modifie ici pour tout changer
+═══════════════════════════════════════ */
 :root {
-  --rose:        #f4a7b9;
-  --rose-light:  #fde8ef;
-  --rose-deep:   #e07fa0;
-  --lavender:    #c9b8e8;
-  --lav-light:   #ede7f6;
-  --lav-deep:    #9c7fc4;
-  --cream:       #fff8fb;
-  --text-dark:   #3a2040;
-  --text-mid:    #7a5a80;
-  --text-light:  #b8a0c0;
-  --white:       #ffffff;
+  /* Doraemon bleu + touches roses */
+  --dora-blue:     #00A8E8;
+  --dora-dark:     #0082B8;
+  --dora-light:    #E0F4FF;
+  --dora-pale:     #F0FAFF;
+  --rose:          #FFB6C8;
+  --rose-deep:     #E8799A;
+  --rose-light:    #FFE8F0;
+  --gold:          #FFD700;
+  --white:         #ffffff;
+  --text-dark:     #1A2C3D;
+  --text-mid:      #4A7090;
+  --text-light:    #90B8CC;
+  --cream:         #F8FCFF;
 
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-display:  'Playfair Display', Georgia, serif;
+  --font-body:     'Nunito', system-ui, sans-serif;
 
-  --radius-card:  24px;
-  --radius-btn:   50px;
-  --radius-bubble: 18px;
+  --radius-card:   28px;
+  --radius-btn:    50px;
+  --radius-bubble: 20px;
 
-  --shadow-card: 0 12px 40px rgba(180, 100, 160, 0.15);
-  --shadow-btn:  0 4px 18px rgba(224, 127, 160, 0.4);
+  --shadow-blue:   0 12px 40px rgba(0,168,232,0.22);
+  --shadow-rose:   0 8px 28px rgba(232,121,154,0.3);
+  --shadow-card:   0 16px 50px rgba(0,100,160,0.13);
 }
 
-/* ═══════════════════════════════════════════════
+/* ═══════════════════════════════════════
    RESET & BASE
-═══════════════════════════════════════════════ */
+═══════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { font-size: 16px; }
 
 body {
   font-family: var(--font-body);
-  background: linear-gradient(145deg, #fce4ec 0%, #ede7f6 50%, #fce4ec 100%);
+  background: linear-gradient(160deg, #E0F4FF 0%, #FFE8F0 50%, #E0F4FF 100%);
+  background-size: 400% 400%;
+  animation: bgShift 12s ease infinite;
   min-height: 100vh;
   overflow-x: hidden;
   color: var(--text-dark);
 }
 
-/* ═══════════════════════════════════════════════
-   FLOATING HEARTS
-═══════════════════════════════════════════════ */
-#hearts-container {
+@keyframes bgShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* ═══════════════════════════════════════
+   PARTICULES FLOTTANTES
+═══════════════════════════════════════ */
+#particles {
   position: fixed;
   inset: 0;
   pointer-events: none;
@@ -51,24 +62,24 @@ body {
   overflow: hidden;
 }
 
-.heart-particle {
+.particle {
   position: absolute;
   bottom: -40px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   animation: floatUp linear infinite;
-  opacity: 0.55;
+  opacity: 0.5;
   user-select: none;
 }
 
 @keyframes floatUp {
-  0%   { transform: translateY(0) rotate(0deg) scale(1);   opacity: 0.55; }
-  80%  { opacity: 0.3; }
-  100% { transform: translateY(-110vh) rotate(30deg) scale(0.6); opacity: 0; }
+  0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.5; }
+  80%  { opacity: 0.25; }
+  100% { transform: translateY(-115vh) rotate(25deg) scale(0.5); opacity: 0; }
 }
 
-/* ═══════════════════════════════════════════════
-   SCREENS — full-viewport sections
-═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   SCREENS
+═══════════════════════════════════════ */
 .screen {
   position: fixed;
   inset: 0;
@@ -77,68 +88,176 @@ body {
   justify-content: center;
   padding: 20px;
   z-index: 1;
-
   opacity: 0;
-  transform: translateY(30px) scale(0.97);
+  transform: translateY(28px) scale(0.97);
   pointer-events: none;
-  transition: opacity 0.55s cubic-bezier(.4,0,.2,1),
-              transform 0.55s cubic-bezier(.4,0,.2,1);
+  transition: opacity 0.5s cubic-bezier(.4,0,.2,1),
+              transform 0.5s cubic-bezier(.4,0,.2,1);
 }
-
 .screen.active {
   opacity: 1;
   transform: translateY(0) scale(1);
   pointer-events: all;
 }
-
 .screen.exit {
   opacity: 0;
-  transform: translateY(-30px) scale(0.97);
+  transform: translateY(-28px) scale(0.97);
 }
 
-/* ═══════════════════════════════════════════════
-   SCREEN 1 — CHAT
-═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   ÉCRAN 1 — INTRO DORAEMON
+═══════════════════════════════════════ */
+.intro-wrap {
+  text-align: center;
+  max-width: 340px;
+  width: 100%;
+}
+
+.doraemon-bounce {
+  width: 180px;
+  margin: 0 auto 20px;
+  animation: bounce 2.2s ease-in-out infinite;
+  filter: drop-shadow(0 12px 20px rgba(0,168,232,0.35));
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%       { transform: translateY(-18px) rotate(2deg); }
+}
+
+.dora-svg { width: 100%; height: auto; }
+
+.intro-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 6vw, 2.2rem);
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.intro-sub {
+  color: var(--text-mid);
+  font-size: 1rem;
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════
+   BOUTONS
+═══════════════════════════════════════ */
+.btn {
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 700;
+  border-radius: var(--radius-btn);
+  padding: 14px 32px;
+  font-size: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+  letter-spacing: 0.02em;
+}
+.btn:active { transform: scale(0.95) !important; }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--dora-blue), var(--dora-dark));
+  color: var(--white);
+  box-shadow: var(--shadow-blue);
+}
+.btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 28px rgba(0,168,232,.45); }
+
+.btn-yes {
+  background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+  color: var(--white);
+  box-shadow: var(--shadow-rose);
+}
+.btn-yes:hover { transform: translateY(-3px) scale(1.03); }
+
+.btn-no {
+  background: var(--dora-light);
+  color: var(--dora-dark);
+  font-weight: 600;
+}
+.btn-no:hover { transform: translateY(-2px); }
+
+.btn-no.escaped {
+  position: fixed !important;
+  transition: top 0.22s cubic-bezier(.4,0,.2,1), left 0.22s cubic-bezier(.4,0,.2,1);
+  z-index: 999;
+}
+
+.btn-group {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ═══════════════════════════════════════
+   ÉCRAN 2 — CHAT
+═══════════════════════════════════════ */
 .phone-frame {
   background: var(--white);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
   width: 100%;
-  max-width: 380px;
+  max-width: 370px;
   overflow: hidden;
+  border: 1.5px solid rgba(0,168,232,0.12);
 }
 
 .chat-header {
-  background: linear-gradient(135deg, var(--rose), var(--lavender));
-  padding: 14px 18px;
+  background: linear-gradient(135deg, var(--dora-blue), var(--dora-dark));
+  padding: 14px 16px;
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-
-.avatar {
-  width: 42px;
-  height: 42px;
-  background: var(--white);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 1.3rem;
-  flex-shrink: 0;
-}
-
-.chat-name  { font-weight: 600; color: var(--white); display: block; font-size: 1rem; }
-.chat-status { font-size: 0.72rem; color: rgba(255,255,255,0.82); display: block; }
-
-.chat-body {
-  padding: 18px 14px 22px;
-  min-height: 220px;
-  display: flex;
-  flex-direction: column;
   gap: 10px;
 }
 
-/* Chat bubbles */
+.avatar-wrap {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.22);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.chat-name   { font-weight: 800; color: var(--white); display: block; font-size: 0.95rem; }
+.chat-status { font-size: 0.7rem; color: rgba(255,255,255,0.78); display: block; }
+
+.signal-dots {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.signal-dots span {
+  width: 5px; height: 5px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  animation: signalPulse 1.5s infinite ease-in-out;
+}
+.signal-dots span:nth-child(2) { animation-delay: 0.2s; }
+.signal-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes signalPulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1; }
+}
+
+.chat-body {
+  padding: 16px 14px 20px;
+  min-height: 200px;
+  max-height: 55vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--cream);
+}
+
+/* Bulles de chat */
 .bubble-row {
   display: flex;
   gap: 8px;
@@ -148,35 +267,38 @@ body {
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 .bubble-row.visible { opacity: 1; transform: translateY(0); }
-.bubble-row.me  { flex-direction: row-reverse; }
+.bubble-row.me { flex-direction: row-reverse; }
 
 .bubble-avatar {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--rose), var(--lavender));
   display: grid;
   place-items: center;
   font-size: 0.85rem;
   flex-shrink: 0;
 }
+.bubble-row.them .bubble-avatar { background: var(--dora-light); }
+.bubble-row.me   .bubble-avatar { background: var(--rose-light); }
 
 .bubble {
-  max-width: 70%;
+  max-width: 72%;
   padding: 10px 14px;
   border-radius: var(--radius-bubble);
-  font-size: 0.9rem;
-  line-height: 1.45;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  font-weight: 600;
 }
 
 .bubble-row.them .bubble {
-  background: var(--lav-light);
+  background: var(--white);
   color: var(--text-dark);
   border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .bubble-row.me .bubble {
-  background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+  background: linear-gradient(135deg, var(--dora-blue), var(--dora-dark));
   color: var(--white);
   border-bottom-right-radius: 4px;
 }
@@ -189,47 +311,64 @@ body {
   padding: 12px 14px;
 }
 .typing-dots span {
-  width: 7px;
-  height: 7px;
+  width: 7px; height: 7px;
   background: var(--text-light);
   border-radius: 50%;
   animation: dotBounce 1.2s infinite ease-in-out;
 }
 .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
 .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
-
 @keyframes dotBounce {
   0%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-6px); }
+  40%            { transform: translateY(-6px); }
 }
 
-/* ═══════════════════════════════════════════════
-   SCREEN 2 — PROPOSAL CARD
-═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   ÉCRAN 3 — CARTE PROPOSITION
+═══════════════════════════════════════ */
 .proposal-card {
   background: var(--white);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
-  padding: 44px 32px 38px;
+  padding: 44px 32px 40px;
   max-width: 360px;
   width: 100%;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid rgba(0,168,232,0.1);
 }
 
-.card-emoji {
-  font-size: 3.2rem;
-  margin-bottom: 16px;
+/* Décorations coins */
+.card-deco {
+  position: absolute;
+  font-size: 1.6rem;
+  opacity: 0.18;
+  animation: decoFloat 3s ease-in-out infinite;
+}
+.top-left  { top: 14px;  left: 16px; }
+.top-right { top: 14px;  right: 16px; animation-delay: 0.5s; }
+.bot-left  { bottom: 14px; left: 16px; animation-delay: 1s; }
+.bot-right { bottom: 14px; right: 16px; animation-delay: 1.5s; }
+
+@keyframes decoFloat {
+  0%, 100% { transform: scale(1) rotate(-5deg); }
+  50%       { transform: scale(1.2) rotate(5deg); }
+}
+
+.card-icon {
+  font-size: 3.5rem;
+  margin-bottom: 18px;
   animation: petals 3s ease-in-out infinite;
 }
-
 @keyframes petals {
   0%, 100% { transform: rotate(-6deg) scale(1); }
-  50%       { transform: rotate(6deg)  scale(1.08); }
+  50%       { transform: rotate(6deg) scale(1.1); }
 }
 
 .card-title {
   font-family: var(--font-display);
-  font-size: clamp(1.55rem, 5vw, 2rem);
+  font-size: clamp(1.5rem, 5vw, 1.95rem);
   font-weight: 600;
   color: var(--text-dark);
   line-height: 1.25;
@@ -237,224 +376,229 @@ body {
 }
 
 .card-sub {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: var(--text-mid);
-  margin-bottom: 32px;
+  margin-bottom: 30px;
+  font-weight: 600;
 }
 
-/* ═══════════════════════════════════════════════
-   BUTTONS
-═══════════════════════════════════════════════ */
-.btn-group {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.btn {
-  border: none;
-  cursor: pointer;
-  font-family: var(--font-body);
-  font-weight: 500;
-  border-radius: var(--radius-btn);
-  padding: 13px 30px;
-  font-size: 1rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-  outline: none;
-}
-
-.btn:active { transform: scale(0.96); }
-
-.btn-yes {
-  background: linear-gradient(135deg, var(--rose), var(--rose-deep));
-  color: var(--white);
-  box-shadow: var(--shadow-btn);
-}
-.btn-yes:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 24px rgba(224,127,160,.5); }
-
-.btn-no {
-  background: var(--lav-light);
-  color: var(--lav-deep);
-}
-.btn-no:hover { transform: translateY(-2px); }
-
-/* NO button run-away animation */
-.btn-no.escaped {
-  position: fixed !important;
-  transition: top 0.25s cubic-bezier(.4,0,.2,1), left 0.25s cubic-bezier(.4,0,.2,1);
-}
-
-/* ═══════════════════════════════════════════════
-   SCREEN 3 — YES
-═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   ÉCRAN 4 — OUI !
+═══════════════════════════════════════ */
 .yes-card {
   background: var(--white);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
-  padding: 44px 32px 38px;
+  padding: 40px 28px 36px;
   max-width: 360px;
   width: 100%;
   text-align: center;
+  border: 1.5px solid rgba(0,168,232,0.1);
 }
 
-.confetti-emoji {
-  font-size: 3.5rem;
-  animation: popIn 0.6s cubic-bezier(.4,0,.2,1) both;
+.yes-dora {
+  width: 120px;
+  margin: 0 auto 16px;
+  animation: jumpJoy 0.7s cubic-bezier(.4,0,.2,1) both;
 }
-
-@keyframes popIn {
-  0%   { transform: scale(0) rotate(-20deg); }
-  70%  { transform: scale(1.18) rotate(5deg); }
+@keyframes jumpJoy {
+  0%   { transform: scale(0) rotate(-15deg); }
+  65%  { transform: scale(1.15) rotate(5deg); }
   100% { transform: scale(1) rotate(0deg); }
 }
 
+.dora-mini { width: 100%; height: auto; filter: drop-shadow(0 6px 14px rgba(0,168,232,0.3)); }
+
 .yes-title {
   font-family: var(--font-display);
-  font-size: clamp(1.4rem, 5vw, 1.85rem);
-  color: var(--text-dark);
-  margin: 16px 0 10px;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  color: var(--dora-blue);
+  margin-bottom: 12px;
 }
 
 .yes-msg {
   color: var(--text-mid);
   font-size: 0.95rem;
-  line-height: 1.7;
-  margin-bottom: 28px;
+  line-height: 1.75;
+  margin-bottom: 26px;
+  font-weight: 600;
 }
+.yes-msg em { color: var(--rose-deep); font-style: normal; font-weight: 700; }
 
-/* ═══════════════════════════════════════════════
-   SCREEN 4 — DATE PICKER
-═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   ÉCRAN 5 — SÉLECTEUR DATE
+═══════════════════════════════════════ */
 .picker-card {
   background: var(--white);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
-  padding: 36px 28px 38px;
-  max-width: 400px;
+  padding: 36px 26px 38px;
+  max-width: 390px;
   width: 100%;
+  border: 1.5px solid rgba(0,168,232,0.1);
 }
+
+.picker-icon { font-size: 2.5rem; text-align: center; margin-bottom: 10px; }
 
 .picker-title {
   font-family: var(--font-display);
   font-size: 1.6rem;
   color: var(--text-dark);
-  margin-bottom: 26px;
   text-align: center;
+  margin-bottom: 6px;
 }
 
-.field-group { margin-bottom: 18px; }
+.picker-sub {
+  text-align: center;
+  color: var(--text-mid);
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.field-group { margin-bottom: 16px; }
 
 .field-label {
   display: block;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--text-mid);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--dora-blue);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   margin-bottom: 7px;
 }
 
 .field-input {
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid var(--rose-light);
+  border: 2px solid var(--dora-light);
   border-radius: 14px;
   font-family: var(--font-body);
   font-size: 0.95rem;
+  font-weight: 600;
   color: var(--text-dark);
   background: var(--cream);
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
   appearance: none;
 }
-.field-input:focus { border-color: var(--rose); }
-
-.field-textarea {
-  resize: vertical;
-  min-height: 80px;
-  line-height: 1.5;
+.field-input:focus {
+  border-color: var(--dora-blue);
+  box-shadow: 0 0 0 3px rgba(0,168,232,0.12);
 }
 
-.picker-card .btn-yes { width: 100%; margin-top: 6px; }
+.field-textarea { resize: vertical; min-height: 76px; line-height: 1.5; }
 
-/* ═══════════════════════════════════════════════
-   SCREEN 5 — FINAL
-═══════════════════════════════════════════════ */
+.picker-card .btn-primary { width: 100%; margin-top: 8px; font-size: 1.05rem; }
+
+/* ═══════════════════════════════════════
+   ÉCRAN 6 — FINAL
+═══════════════════════════════════════ */
 .final-card {
-  background: linear-gradient(145deg, var(--rose-light), var(--lav-light));
+  background: linear-gradient(145deg, var(--dora-light), var(--rose-light));
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
-  padding: 48px 32px 44px;
+  padding: 46px 28px 42px;
   max-width: 370px;
   width: 100%;
   text-align: center;
 }
 
-.final-emoji {
-  font-size: 3.5rem;
-  animation: heartbeat 1.2s ease-in-out infinite;
+.final-dora-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  animation: heartbeat 1.4s ease-in-out infinite;
 }
+.final-dora-emoji { font-size: 2.8rem; }
+.final-heart-l, .final-heart-r { font-size: 1.8rem; }
 
 @keyframes heartbeat {
   0%, 100% { transform: scale(1); }
-  30%       { transform: scale(1.18); }
-  60%       { transform: scale(0.96); }
+  30%       { transform: scale(1.1); }
+  60%       { transform: scale(0.97); }
 }
 
 .final-title {
   font-family: var(--font-display);
-  font-size: 1.75rem;
-  margin: 18px 0 12px;
+  font-size: 1.8rem;
   color: var(--text-dark);
+  margin-bottom: 18px;
 }
 
 .final-summary {
   background: var(--white);
-  border-radius: 14px;
-  padding: 16px 20px;
+  border-radius: 16px;
+  padding: 18px 20px;
   font-size: 0.95rem;
+  font-weight: 700;
   color: var(--text-dark);
-  line-height: 1.7;
-  margin-bottom: 20px;
+  line-height: 1.8;
+  margin-bottom: 18px;
   text-align: left;
+  box-shadow: 0 4px 16px rgba(0,100,160,0.08);
+  white-space: pre-line;
 }
 
 .final-footer {
   font-size: 0.9rem;
   color: var(--text-mid);
-  line-height: 1.8;
+  line-height: 1.9;
+  font-weight: 600;
 }
+.final-footer em { color: var(--dora-blue); font-style: normal; font-weight: 800; }
 
-/* ═══════════════════════════════════════════════
-   BURST HEARTS (click effect)
-═══════════════════════════════════════════════ */
-.burst-heart {
+/* ═══════════════════════════════════════
+   BURST HEARTS (effet clic)
+═══════════════════════════════════════ */
+.burst-particle {
   position: fixed;
   pointer-events: none;
   font-size: 1.4rem;
-  z-index: 999;
+  z-index: 9999;
   animation: burstFly 0.9s ease-out forwards;
 }
-
 @keyframes burstFly {
   0%   { opacity: 1; transform: translate(0,0) scale(1); }
-  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.4); }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.3); }
 }
 
-/* ═══════════════════════════════════════════════
-   RESPONSIVE TWEAKS
-═══════════════════════════════════════════════ */
-@media (max-width: 420px) {
-  .proposal-card,
-  .yes-card,
-  .picker-card,
-  .final-card { padding: 32px 20px 30px; }
-
-  .card-title { font-size: 1.35rem; }
+/* ═══════════════════════════════════════
+   TOAST MESSAGE (bouton non)
+═══════════════════════════════════════ */
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--white);
+  color: var(--dora-dark);
+  padding: 11px 24px;
+  border-radius: 50px;
+  box-shadow: 0 4px 22px rgba(0,0,0,0.13);
+  font-weight: 800;
+  font-size: 0.88rem;
+  z-index: 9999;
+  white-space: nowrap;
+  border: 2px solid var(--dora-light);
+  animation: toastIn 0.3s cubic-bezier(.4,0,.2,1);
+}
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
-/* Respect reduced motion */
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 400px) {
+  .proposal-card, .yes-card, .picker-card, .final-card { padding: 30px 18px 28px; }
+  .card-title { font-size: 1.3rem; }
+  .doraemon-bounce { width: 150px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }

@@ -1,108 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A little question for you 🌸</title>
+  <title>Une petite question pour toi 💙</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- ✦ Floating hearts background -->
-  <div id="hearts-container" aria-hidden="true"></div>
+  <!-- Particules flottantes en arrière-plan -->
+  <div id="particles" aria-hidden="true"></div>
 
-  <!-- ═══════════════════════════════════════════
-       SCREEN 1 — Fake chat conversation
-       To edit messages: change the text inside the <span class="bubble"> tags
-  ═══════════════════════════════════════════ -->
-  <section id="screen-chat" class="screen active">
+  <!-- ════════════════════════════════════
+       ÉCRAN 1 — Intro Doraemon animée
+  ════════════════════════════════════ -->
+  <section id="screen-intro" class="screen active">
+    <div class="intro-wrap">
+      <div class="doraemon-bounce">
+        <!-- Doraemon SVG inline -->
+        <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" class="dora-svg">
+          <!-- Corps bleu -->
+          <ellipse cx="100" cy="150" rx="72" ry="65" fill="#00A8E8"/>
+          <!-- Ventre blanc -->
+          <ellipse cx="100" cy="158" rx="52" ry="48" fill="#fff"/>
+          <!-- Tête -->
+          <circle cx="100" cy="82" r="68" fill="#00A8E8"/>
+          <!-- Visage blanc -->
+          <ellipse cx="100" cy="92" rx="52" ry="46" fill="#fff"/>
+          <!-- Yeux -->
+          <circle cx="82" cy="72" r="14" fill="#fff"/>
+          <circle cx="118" cy="72" r="14" fill="#fff"/>
+          <circle cx="85" cy="74" r="9" fill="#1a1a1a"/>
+          <circle cx="121" cy="74" r="9" fill="#1a1a1a"/>
+          <!-- Reflets yeux -->
+          <circle cx="88" cy="70" r="3" fill="#fff"/>
+          <circle cx="124" cy="70" r="3" fill="#fff"/>
+          <!-- Nez rouge -->
+          <circle cx="100" cy="90" r="9" fill="#E8001C"/>
+          <!-- Moustaches -->
+          <line x1="35" y1="95" x2="88" y2="100" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="35" y1="105" x2="88" y2="103" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="112" y1="100" x2="165" y2="95" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="112" y1="103" x2="165" y2="105" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Bouche sourire -->
+          <path d="M76 112 Q100 132 124 112" stroke="#1a1a1a" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- Collier rouge -->
+          <rect x="62" y="138" width="76" height="10" rx="5" fill="#E8001C"/>
+          <!-- Clochette -->
+          <ellipse cx="100" cy="152" rx="10" ry="9" fill="#FFD700"/>
+          <ellipse cx="100" cy="148" rx="5" ry="4" fill="#FFB300"/>
+          <!-- Bras -->
+          <ellipse cx="30" cy="168" rx="22" ry="16" fill="#00A8E8" transform="rotate(-20 30 168)"/>
+          <ellipse cx="170" cy="168" rx="22" ry="16" fill="#00A8E8" transform="rotate(20 170 168)"/>
+          <!-- Mains blanches -->
+          <circle cx="20" cy="180" r="14" fill="#fff"/>
+          <circle cx="180" cy="180" r="14" fill="#fff"/>
+          <!-- Pieds -->
+          <ellipse cx="76" cy="210" rx="26" ry="12" fill="#fff"/>
+          <ellipse cx="124" cy="210" rx="26" ry="12" fill="#fff"/>
+          <!-- Poche -->
+          <path d="M72 170 Q100 180 128 170 Q128 200 100 202 Q72 200 72 170" fill="#00A8E8" stroke="#0090CC" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <h1 class="intro-title">Salut Tsiaro ! 👋</h1>
+      <p class="intro-sub">J'ai quelque chose d'important à te dire…</p>
+      <button id="btn-start" class="btn btn-primary">
+        Je t'écoute 🥺
+      </button>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       ÉCRAN 2 — Fausse conversation chat
+  ════════════════════════════════════ -->
+  <section id="screen-chat" class="screen">
     <div class="phone-frame">
       <div class="chat-header">
-        <div class="avatar">💌</div>
+        <div class="avatar-wrap">
+          <span class="avatar-emoji">💙</span>
+        </div>
         <div class="chat-info">
-          <span class="chat-name">Your Name</span>  <!-- ← change your name here -->
-          <span class="chat-status">online now</span>
+          <!-- ← Change le prénom ici si besoin -->
+          <span class="chat-name">Ryan</span>
+          <span class="chat-status">en ligne maintenant</span>
+        </div>
+        <div class="signal-dots">
+          <span></span><span></span><span></span>
         </div>
       </div>
-
-      <div class="chat-body" id="chat-body">
-        <!-- Messages are injected by JS — edit CONFIG in script.js to change them -->
-      </div>
+      <div class="chat-body" id="chat-body"></div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════
-       SCREEN 2 — Date proposal card
-  ═══════════════════════════════════════════ -->
+  <!-- ════════════════════════════════════
+       ÉCRAN 3 — Carte proposition
+  ════════════════════════════════════ -->
   <section id="screen-card" class="screen">
     <div class="proposal-card">
-      <div class="card-emoji">🌸</div>
-      <h1 class="card-title">Will you go on a date with me?</h1>  <!-- ← change question here -->
-      <p class="card-sub">I promise it'll be magical ✨</p>          <!-- ← change subtitle here -->
+      <div class="card-deco top-left">💙</div>
+      <div class="card-deco top-right">🌸</div>
+      <div class="card-icon">🌸</div>
+
+      <!-- ← Change la question ici -->
+      <h1 class="card-title">Tu veux bien sortir avec moi ?</h1>
+      <!-- ← Change le sous-titre ici -->
+      <p class="card-sub">Je promets que ce sera inoubliable ✨</p>
 
       <div class="btn-group">
-        <button id="btn-yes" class="btn btn-yes">YES 💖</button>
-        <button id="btn-no"  class="btn btn-no">no...</button>
+        <button id="btn-yes" class="btn btn-yes">OUI 💖</button>
+        <button id="btn-no" class="btn btn-no">non…</button>
       </div>
+      <div class="card-deco bot-left">✨</div>
+      <div class="card-deco bot-right">💕</div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════
-       SCREEN 3 — YES celebration
-  ═══════════════════════════════════════════ -->
+  <!-- ════════════════════════════════════
+       ÉCRAN 4 — Célébration YES
+  ════════════════════════════════════ -->
   <section id="screen-yes" class="screen">
     <div class="yes-card">
-      <div class="confetti-emoji">🎉</div>
-      <h2 class="yes-title">YAY! She said YES! 🥹💕</h2>  <!-- ← change celebration message here -->
+      <div class="yes-dora">
+        <!-- Mini Doraemon qui saute de joie -->
+        <svg viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg" class="dora-mini">
+          <ellipse cx="60" cy="90" rx="43" ry="38" fill="#00A8E8"/>
+          <ellipse cx="60" cy="95" rx="31" ry="28" fill="#fff"/>
+          <circle cx="60" cy="48" r="40" fill="#00A8E8"/>
+          <ellipse cx="60" cy="55" rx="31" ry="27" fill="#fff"/>
+          <circle cx="49" cy="42" r="8" fill="#fff"/>
+          <circle cx="71" cy="42" r="8" fill="#fff"/>
+          <circle cx="51" cy="44" r="5" fill="#1a1a1a"/>
+          <circle cx="73" cy="44" r="5" fill="#1a1a1a"/>
+          <circle cx="53" cy="42" r="2" fill="#fff"/>
+          <circle cx="75" cy="42" r="2" fill="#fff"/>
+          <circle cx="60" cy="53" r="5" fill="#E8001C"/>
+          <path d="M46 66 Q60 78 74 66" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <rect x="37" y="82" width="46" height="6" rx="3" fill="#E8001C"/>
+          <ellipse cx="60" cy="91" rx="6" ry="5" fill="#FFD700"/>
+          <ellipse cx="18" cy="100" rx="13" ry="9" fill="#00A8E8" transform="rotate(-20 18 100)"/>
+          <ellipse cx="102" cy="100" rx="13" ry="9" fill="#00A8E8" transform="rotate(20 102 100)"/>
+          <circle cx="11" cy="108" r="9" fill="#fff"/>
+          <circle cx="109" cy="108" r="9" fill="#fff"/>
+          <ellipse cx="46" cy="125" rx="16" ry="7" fill="#fff"/>
+          <ellipse cx="74" cy="125" rx="16" ry="7" fill="#fff"/>
+        </svg>
+      </div>
+
+      <!-- ← Change le titre de célébration ici -->
+      <h2 class="yes-title">YESSS ! 🎉💙</h2>
+      <!-- ← Change le message ici -->
       <p class="yes-msg">
-        I knew you would 🥺<br>
-        Now let's pick our perfect day!
+        Je savais que tu dirais oui 🥹<br>
+        T'es trop la meilleure, Tsiaro !<br>
+        <em>Maintenant on choisit notre date !</em>
       </p>
-      <!-- ← change the two lines above to what you want -->
-      <button id="btn-next" class="btn btn-yes">Pick a date 📅</button>
+      <button id="btn-next" class="btn btn-primary">Choisir la date 📅</button>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════
-       SCREEN 4 — Date & time picker
-  ═══════════════════════════════════════════ -->
+  <!-- ════════════════════════════════════
+       ÉCRAN 5 — Sélecteur de date
+  ════════════════════════════════════ -->
   <section id="screen-picker" class="screen">
     <div class="picker-card">
-      <h2 class="picker-title">Choose our date 🗓️</h2>  <!-- ← change title here -->
+      <div class="picker-icon">🗓️</div>
+      <!-- ← Change le titre ici -->
+      <h2 class="picker-title">Notre rendez-vous</h2>
+      <p class="picker-sub">Choisis quand tu veux qu'on se retrouve 💙</p>
 
       <div class="field-group">
-        <label class="field-label">What day works for you?</label>
+        <label class="field-label">📅 Quel jour ?</label>
         <input type="date" id="pick-date" class="field-input" />
       </div>
 
       <div class="field-group">
-        <label class="field-label">What time?</label>
+        <label class="field-label">🕐 À quelle heure ?</label>
         <input type="time" id="pick-time" class="field-input" />
       </div>
 
       <div class="field-group">
-        <label class="field-label">Any wishes? 🌙</label>  <!-- ← change label here -->
+        <label class="field-label">🌙 Un souhait ?</label>
         <textarea id="pick-note" class="field-input field-textarea"
-          placeholder="e.g. I want sushi 🍣 and a walk after…"></textarea>
-        <!-- ← change placeholder text above -->
+          placeholder="ex: je veux des sushis 🍣 ou une balade après…"></textarea>
       </div>
 
-      <button id="btn-confirm" class="btn btn-yes">It's a date! 💌</button>
+      <button id="btn-confirm" class="btn btn-primary">C'est notre date ! 💌</button>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════
-       SCREEN 5 — Final confirmation
-  ═══════════════════════════════════════════ -->
+  <!-- ════════════════════════════════════
+       ÉCRAN 6 — Confirmation finale
+  ════════════════════════════════════ -->
   <section id="screen-final" class="screen">
     <div class="final-card">
-      <div class="final-emoji">💌</div>
-      <h2 class="final-title">It's official! 🥂</h2>  <!-- ← change final title here -->
-      <p id="final-summary" class="final-summary"></p>
+      <div class="final-dora-wrap">
+        <span class="final-heart-l">💙</span>
+        <span class="final-dora-emoji">🤖</span>
+        <span class="final-heart-r">💙</span>
+      </div>
+      <!-- ← Change le titre final ici -->
+      <h2 class="final-title">C'est officiel ! 💙🌸</h2>
+      <div id="final-summary" class="final-summary"></div>
+      <!-- ← Change la signature ici -->
       <p class="final-footer">
-        Can't wait to see you 🌷<br>
-        <em>— Your Name</em>  <!-- ← change your name here -->
+        J'ai hâte de te voir 🌷<br>
+        <em>— Ryan 💙</em>
       </p>
     </div>
   </section>
