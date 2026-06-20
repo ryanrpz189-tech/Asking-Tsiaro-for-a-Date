@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A little question for you 🌸</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ✦ Floating hearts background -->
+  <div id="hearts-container" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN 1 — Fake chat conversation
+       To edit messages: change the text inside the <span class="bubble"> tags
+  ═══════════════════════════════════════════ -->
+  <section id="screen-chat" class="screen active">
+    <div class="phone-frame">
+      <div class="chat-header">
+        <div class="avatar">💌</div>
+        <div class="chat-info">
+          <span class="chat-name">Your Name</span>  <!-- ← change your name here -->
+          <span class="chat-status">online now</span>
+        </div>
+      </div>
+
+      <div class="chat-body" id="chat-body">
+        <!-- Messages are injected by JS — edit CONFIG in script.js to change them -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN 2 — Date proposal card
+  ═══════════════════════════════════════════ -->
+  <section id="screen-card" class="screen">
+    <div class="proposal-card">
+      <div class="card-emoji">🌸</div>
+      <h1 class="card-title">Will you go on a date with me?</h1>  <!-- ← change question here -->
+      <p class="card-sub">I promise it'll be magical ✨</p>          <!-- ← change subtitle here -->
+
+      <div class="btn-group">
+        <button id="btn-yes" class="btn btn-yes">YES 💖</button>
+        <button id="btn-no"  class="btn btn-no">no...</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN 3 — YES celebration
+  ═══════════════════════════════════════════ -->
+  <section id="screen-yes" class="screen">
+    <div class="yes-card">
+      <div class="confetti-emoji">🎉</div>
+      <h2 class="yes-title">YAY! She said YES! 🥹💕</h2>  <!-- ← change celebration message here -->
+      <p class="yes-msg">
+        I knew you would 🥺<br>
+        Now let's pick our perfect day!
+      </p>
+      <!-- ← change the two lines above to what you want -->
+      <button id="btn-next" class="btn btn-yes">Pick a date 📅</button>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN 4 — Date & time picker
+  ═══════════════════════════════════════════ -->
+  <section id="screen-picker" class="screen">
+    <div class="picker-card">
+      <h2 class="picker-title">Choose our date 🗓️</h2>  <!-- ← change title here -->
+
+      <div class="field-group">
+        <label class="field-label">What day works for you?</label>
+        <input type="date" id="pick-date" class="field-input" />
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">What time?</label>
+        <input type="time" id="pick-time" class="field-input" />
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Any wishes? 🌙</label>  <!-- ← change label here -->
+        <textarea id="pick-note" class="field-input field-textarea"
+          placeholder="e.g. I want sushi 🍣 and a walk after…"></textarea>
+        <!-- ← change placeholder text above -->
+      </div>
+
+      <button id="btn-confirm" class="btn btn-yes">It's a date! 💌</button>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN 5 — Final confirmation
+  ═══════════════════════════════════════════ -->
+  <section id="screen-final" class="screen">
+    <div class="final-card">
+      <div class="final-emoji">💌</div>
+      <h2 class="final-title">It's official! 🥂</h2>  <!-- ← change final title here -->
+      <p id="final-summary" class="final-summary"></p>
+      <p class="final-footer">
+        Can't wait to see you 🌷<br>
+        <em>— Your Name</em>  <!-- ← change your name here -->
+      </p>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
